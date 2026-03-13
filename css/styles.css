@@ -1,0 +1,213 @@
+body{
+    background:#111111;
+    color:#e5e5e5;
+    font-family:'Inter',sans-serif;
+    scroll-behavior:smooth;
+    }
+    
+    h1,h2,h3,h4{
+    font-family:'Cinzel',serif;
+    }
+    
+    .navbar{
+    background:#111111;
+    border-bottom:1px solid #222;
+    }
+    
+    .navbar-brand{
+    letter-spacing:2px;
+    }
+    
+    .hero{
+    height:95vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    }
+    
+    .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url('../img/hero2.jpg');
+    background-size:cover;
+    background-position:center;
+    filter:blur(8px);
+    transform:scale(1.1);
+    }
+
+    .logo-yunque{
+        height:40px;
+        width:auto;
+        margin-right:10px;
+    }
+    
+    .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    }
+    
+    .hero .container{
+    position:relative;
+    z-index:2;
+    }
+    
+    .hero h1{
+    font-size:4.5rem;
+    letter-spacing:4px;
+    }
+    
+    .hero p{
+    font-size:1.3rem;
+    opacity:.9;
+    }
+    
+    .gold{
+    color:#c6a35a;
+    }
+    
+    .btn-gold{
+    background:#c6a35a;
+    border:none;
+    color:#111;
+    padding:12px 28px;
+    font-weight:500;
+    }
+    
+    .btn-gold:hover{
+    background:#d4b46a;
+    }
+    
+    .section{
+    padding:90px 0;
+    }
+    
+    .card{
+    background:#1a1a1a;
+    border:none;
+    transition:transform .3s;
+    }
+    
+    .card:hover{
+    transform:translateY(-6px);
+    }
+    
+    .card-body{
+    color:#e5e5e5;
+    }
+    
+    .card-body p{
+    color:#bbbbbb;
+    }
+
+    .card img{
+    height:260px;
+    object-fit:cover;
+    }
+    
+    .gallery img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    }
+    
+    .process-box{
+    padding:20px;
+    }
+    
+    .process-number{
+    font-size:2rem;
+    color:#c6a35a;
+    margin-bottom:10px;
+    }
+    
+    .about{
+    background:#181818;
+    }
+    
+    .footer{
+    background:#0a0a0a;
+    padding:50px 0;
+    margin-top:40px;
+    }
+    
+    
+    /* ZOOM PRODUCTOS */
+
+.product-card{
+    cursor:pointer;
+    overflow:hidden;
+    height:100%;
+    }
+    
+    .product-card img{
+    transition:transform .4s ease;
+    }
+    
+    .product-card:hover img{
+    transform:scale(1.05);
+    }
+
+    .modal-product-image{
+    width:100%;
+    max-height:420px;
+    object-fit:cover;
+    }
+
+    .modal-plan-image{
+    width:100%;
+    max-width:860px;
+    max-height:52vh;
+    object-fit:contain;
+    background:#f7f7f7;
+    padding:8px;
+    display:block;
+    margin:0 auto;
+    }
+
+    .wood-dynamic{
+    border:2px solid #444;
+    }
+
+    .modal-action-btn{
+    min-width:150px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    }
+    
+    
+    /* COLORES DE MADERA */
+    
+    .wood-colors{
+    display:flex;
+    gap:10px;
+    }
+    
+    .wood{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:2px solid #444;
+    }
+    
+    .wood1{
+    background:#c79a63;
+    }
+    
+    .wood2{
+    background:#9b6b3e;
+    }
+    
+    .wood3{
+    background:#6f4a2b;
+    }
+    
+    .wood4{
+    background:#3e2a1c;
+    }

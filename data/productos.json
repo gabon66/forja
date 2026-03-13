@@ -1,0 +1,86 @@
+{
+  "secciones": [
+    {
+      "nombre": "Hierro Negro",
+      "productos": [
+        {
+          "titulo": "Banco Industrial",
+          "descripcion_corta": "Estructura de hierro negro con madera maciza.",
+          "descripcion_modal": "Banco de hierro negro con terminacion artesanal y tapa de madera maciza.",
+          "imagen": "img/banco_negro_simple.jpg",
+          "imagen_plano": "img/plano_banco.png",
+          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 45 cm\nAncho: 120 cm\nProfundidad: 35 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "#"
+        },
+        {
+          "titulo": "Banco Industrial Doble",
+          "descripcion_corta": "Hierro estructural negro y madera natural.",
+          "descripcion_modal": "Version doble del banco industrial con mayor superficie de apoyo.",
+          "imagen": "img/banco_negro_doble.png",
+          "imagen_plano": "img/plano_banco.png",
+          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 45 cm\nAncho: 150 cm\nProfundidad: 35 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "#"
+        },
+        {
+          "titulo": "Mesa Industrial Negra",
+          "descripcion_corta": "Hierro estructural negro y madera natural.",
+          "descripcion_modal": "Mesa de estilo industrial con base de hierro y terminacion resistente.",
+          "imagen": "img/mesa_negra.jpg",
+          "imagen_plano": "img/plano_banco.png",
+          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 78 cm\nAncho: 140 cm\nProfundidad: 70 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "#"
+        }
+      ]
+    },
+    {
+      "nombre": "Hierro Blanco",
+      "productos": [
+        {
+          "titulo": "Banco Industrial Blanca",
+          "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
+          "descripcion_modal": "Banco industrial en hierro blanco, ideal para interiores modernos.",
+          "imagen": "img/banco_doble_blanco.png",
+          "imagen_plano": "img/plano_banco.png",
+          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "#"
+        },
+        {
+            "titulo": "Mesa Industrial Blanca",
+            "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
+            "descripcion_modal": "Mesa industrial en hierro blanco, ideal para interiores modernos.",
+            "imagen": "img/mesa_blanca_reforzada.png",
+            "imagen_plano": "img/plano_banco.png",
+            "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+            "colores_hierro": "Negro industrial / Blanco industrial",
+            "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
+            "url_mercadolibre": "#",
+            "url_consulta": "#"
+        },
+        {
+            "titulo": "Mesa Industrial Blanca Simple   ",
+            "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
+            "descripcion_modal": "Mesa industrial en hierro blanco, ideal para interiores modernos.",
+            "imagen": "img/mesa_blanca_reforzada.png",
+            "imagen_plano": "img/plano_banco.png",
+            "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+            "colores_hierro": "Negro industrial / Blanco industrial",
+            "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
+            "url_mercadolibre": "#",
+            "url_consulta": "#"
+        }
+      ]
+    }
+  ]
+}
