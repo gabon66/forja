@@ -15,6 +15,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalConsulta = document.getElementById("productoConsulta");
   const woodColorsContainer = document.getElementById("productoColoresMadera");
   const planContainer = document.getElementById("productoPlanoContainer");
+  const planToggleButton = modal.querySelector('[data-bs-target="#productoPlanoContainer"]');
+
+  const resetPlanCollapse = () => {
+    if (!planContainer) {
+      return;
+    }
+
+    const collapse = bootstrap.Collapse.getOrCreateInstance(planContainer, { toggle: false });
+    collapse.hide();
+    planContainer.classList.remove("show");
+
+    if (planToggleButton) {
+      planToggleButton.setAttribute("aria-expanded", "false");
+      planToggleButton.classList.add("collapsed");
+    }
+  };
 
   const buildWoodColors = (colors) => {
     woodColorsContainer.innerHTML = "";
@@ -59,10 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     buildWoodColors(parsedColors);
+    resetPlanCollapse();
+  });
 
-    if (planContainer && planContainer.classList.contains("show")) {
-      const collapse = bootstrap.Collapse.getOrCreateInstance(planContainer, { toggle: false });
-      collapse.hide();
-    }
+  modal.addEventListener("hidden.bs.modal", () => {
+    resetPlanCollapse();
   });
 });
