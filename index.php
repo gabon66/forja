@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 $catalogPath = __DIR__ . '/data/productos.json';
 $catalogo = ['secciones' => []];
+$cssPath = __DIR__ . '/css/styles.css';
+$cssVersion = is_file($cssPath) ? (string) filemtime($cssPath) : '1';
 
 if (is_readable($catalogPath)) {
     $jsonRaw = file_get_contents($catalogPath);
@@ -28,7 +30,7 @@ function e(string $value): string
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=<?= e($cssVersion) ?>">
 </head>
 
 <body>
