@@ -72,7 +72,7 @@
             "titulo": "Mesa Industrial Blanca Simple   ",
             "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
             "descripcion_modal": "Mesa industrial en hierro blanco, ideal para interiores modernos.",
-            "imagen": "img/mesa_blanca_reforzada.png",
+            "imagen": "img/mesa_simple_blanca.png",
             "imagen_plano": "img/plano_mesa.png",
             "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
             "colores_hierro": "Negro industrial / Blanco industrial",
