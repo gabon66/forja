@@ -331,6 +331,28 @@ body{
     .product-card-gallery-prev{left:12px}
     .product-card-gallery-next{right:12px}
 
+    .product-card-3d-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    padding:.35rem .65rem;
+    border:1px solid rgba(198,163,90,.65);
+    border-radius:999px;
+    color:#f1d28e;
+    background:rgba(16,16,16,.84);
+    box-shadow:0 2px 10px rgba(0,0,0,.3);
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    pointer-events:none;
+    }
+
+    .product-card-3d-badge i{font-size:.95rem}
+
     .product-card-gallery-count{
     position:absolute;
     right:12px;

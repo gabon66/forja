@@ -129,6 +129,12 @@ function productSlug(string $value): string
                                     <button class="product-card-gallery-nav product-card-gallery-next" type="button" data-gallery-step="1" aria-label="Ver imagen siguiente de <?= e($titulo) ?>">
                                         <i class="bi bi-chevron-right"></i>
                                     </button>
+                                    <?php if ($modelo3d !== ''): ?>
+                                        <span class="product-card-3d-badge" aria-label="Este modelo tiene una vista 3D interactiva">
+                                            <i class="bi bi-box" aria-hidden="true"></i>
+                                            <span>Vista 3D</span>
+                                        </span>
+                                    <?php endif; ?>
                                     <span class="product-card-gallery-count" data-gallery-count aria-live="polite">01 / <?= e(sprintf('%02d', count(is_array($galeria) ? $galeria : []) + 1)) ?></span>
                                 </div>
                                 <div class="card-body">
