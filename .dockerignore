@@ -1,0 +1,7 @@
+.git
+.idea
+.DS_Store
+docker-compose.override.yaml
+compose.override.yaml
+*.log
+

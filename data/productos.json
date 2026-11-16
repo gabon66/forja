@@ -1,84 +1,274 @@
 {
   "secciones": [
     {
-      "nombre": "Hierro Negro",
+      "nombre": "Mesas de Living",
       "productos": [
         {
-          "titulo": "Banco Industrial",
-          "descripcion_corta": "Estructura de hierro negro con madera maciza.",
-          "descripcion_modal": "Banco de hierro negro con terminacion artesanal y tapa de madera maciza.",
-          "imagen": "img/banco_negro_simple.jpg",
-          "imagen_plano": "img/plano_banco_simple.png",
-          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "titulo": "Mesa Living Nord con estante",
+          "descripcion_corta": "Madera maciza y estructura de hierro de líneas geométricas.",
+          "descripcion_modal": "Mesa de living Nord con estante inferior de madera. Disponible con estructura de hierro negro o blanco.",
+          "imagen": "img/mesa_living_nord_01_negra.jpeg",
+          "imagen_hierro_negro": "img/mesa_living_nord_01_negra.jpeg",
+          "imagen_hierro_blanco": "img/mesa_living_nord_01_blanca.png",
+          "modelo_3d": "img/modelos/mesa-living-nord-estante.glb",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/mesa-living-nord-estante-negro-miel.jpg",
+              "img/variantes/mesa-living-nord-estante-negro-roble.jpg",
+              "img/variantes/mesa-living-nord-estante-negro-nogal.jpg",
+              "img/variantes/mesa-living-nord-estante-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/mesa-living-nord-estante-blanco-miel.jpg",
+              "img/variantes/mesa-living-nord-estante-blanco-roble.jpg",
+              "img/variantes/mesa-living-nord-estante-blanco-nogal.jpg",
+              "img/variantes/mesa-living-nord-estante-blanco-ebano.jpg"
+            ]
+          },
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
           "colores_hierro": "Negro industrial / Blanco industrial",
-          "medidas": "Alto: 45 cm\nAncho: 120 cm\nProfundidad: 35 cm",
+          "medidas": "Tapa: 120 × 60 cm\nEspesor de tapa: 3 cm\nAlto total: 60 cm\nPerfiles de hierro: 8 × 8 cm\nMarco trapezoidal: 60 cm arriba y 44 cm en la base",
           "url_mercadolibre": "#",
-          "url_consulta": "#"
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Living%20Nord%20con%20estante.",
+          "galeria": [
+            "img/galeria/mesa-living-nord-estante-angulo.webp",
+            "img/galeria/mesa-living-nord-estante-detalle.webp"
+          ]
         },
         {
-          "titulo": "Banco Industrial Doble",
-          "descripcion_corta": "Hierro estructural negro y madera natural.",
-          "descripcion_modal": "Version doble del banco industrial con mayor superficie de apoyo.",
-          "imagen": "img/banco_negro_doble.png",
-          "imagen_plano": "img/plano_banco_doble.png",
-          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "titulo": "Mesa Living Nord",
+          "descripcion_corta": "Mesa de living de madera maciza con base de hierro.",
+          "descripcion_modal": "Mesa de living Nord de líneas simples y base rectangular. Disponible con estructura de hierro negro o blanco.",
+          "imagen": "img/mesa_living_nord_02_negra.png",
+          "imagen_hierro_negro": "img/mesa_living_nord_02_negra.png",
+          "imagen_hierro_blanco": "img/mesa_living_nord_02_blanca.png",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/mesa-living-nord-negro-miel.jpg",
+              "img/variantes/mesa-living-nord-negro-roble.jpg",
+              "img/variantes/mesa-living-nord-negro-nogal.jpg",
+              "img/variantes/mesa-living-nord-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/mesa-living-nord-blanco-miel.jpg",
+              "img/variantes/mesa-living-nord-blanco-roble.jpg",
+              "img/variantes/mesa-living-nord-blanco-nogal.jpg",
+              "img/variantes/mesa-living-nord-blanco-ebano.jpg"
+            ]
+          },
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
           "colores_hierro": "Negro industrial / Blanco industrial",
-          "medidas": "Alto: 45 cm\nAncho: 150 cm\nProfundidad: 35 cm",
+          "medidas": "Medidas a consultar. Terminación de madera personalizable.",
           "url_mercadolibre": "#",
-          "url_consulta": "#"
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Living%20Nord.",
+          "galeria": [
+            "img/galeria/mesa-living-nord-angulo.webp",
+            "img/galeria/mesa-living-nord-detalle.webp"
+          ]
         },
         {
-          "titulo": "Mesa Industrial Negra",
-          "descripcion_corta": "Hierro estructural negro y madera natural.",
-          "descripcion_modal": "Mesa de estilo industrial con base de hierro y terminacion resistente.",
-          "imagen": "img/mesa_negra.jpg",
-          "imagen_plano": "img/plano_mesa.png",
-          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "titulo": "Mesa Nord para TV",
+          "descripcion_corta": "Mesa baja para TV de hierro y madera, con estante inferior.",
+          "descripcion_modal": "Diseño de mesa para TV con estructura de hierro y estantes de madera. La propuesta se puede adaptar a las medidas y terminaciones que necesites.",
+          "imagen": "img/mesa-tv-nord.webp",
+          "imagen_hierro_negro": "img/mesa-tv-nord.webp",
+          "imagen_hierro_blanco": "img/variantes/mesa-tv-nord-blanco-miel.webp",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/mesa-tv-nord-negro-miel.webp",
+              "img/variantes/mesa-tv-nord-negro-roble.webp",
+              "img/variantes/mesa-tv-nord-negro-nogal.webp",
+              "img/variantes/mesa-tv-nord-negro-ebano.webp"
+            ],
+            "blanco": [
+              "img/variantes/mesa-tv-nord-blanco-miel.webp",
+              "img/variantes/mesa-tv-nord-blanco-roble.webp",
+              "img/variantes/mesa-tv-nord-blanco-nogal.webp",
+              "img/variantes/mesa-tv-nord-blanco-ebano.webp"
+            ]
+          },
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
           "colores_hierro": "Negro industrial / Blanco industrial",
-          "medidas": "Alto: 78 cm\nAncho: 140 cm\nProfundidad: 70 cm",
+          "medidas": "Medidas de referencia. Podemos adaptarlas al espacio y al uso que necesites.",
           "url_mercadolibre": "#",
-          "url_consulta": "#"
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Nord%20para%20TV.",
+          "galeria": [
+            "img/galeria/mesa-tv-nord-angulo.webp",
+            "img/galeria/mesa-tv-nord-detalle.webp"
+          ]
         }
       ]
     },
     {
-      "nombre": "Hierro Blanco",
+      "nombre": "Mesas de Comedor",
       "productos": [
         {
-          "titulo": "Banco Industrial Blanca",
-          "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
-          "descripcion_modal": "Banco industrial en hierro blanco, ideal para interiores modernos.",
-          "imagen": "img/banco_doble_blanco.png",
-          "imagen_plano": "img/plano_banco_simple.png",
-          "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
+          "titulo": "Mesa Industrial",
+          "descripcion_corta": "Líneas simples, madera maciza y estructura de hierro.",
+          "descripcion_modal": "Mesa de estilo industrial con base de hierro y terminación artesanal. Elegí hierro negro o blanco y consultanos por las medidas disponibles.",
+          "imagen": "img/mesa_negra.jpg",
+          "imagen_hierro_negro": "img/mesa_negra.jpg",
+          "imagen_hierro_blanco": "img/mesa_simple_blanca.png",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/mesa-industrial-negro-miel.jpg",
+              "img/variantes/mesa-industrial-negro-roble.jpg",
+              "img/variantes/mesa-industrial-negro-nogal.jpg",
+              "img/variantes/mesa-industrial-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/mesa-industrial-blanco-miel.jpg",
+              "img/variantes/mesa-industrial-blanco-roble.jpg",
+              "img/variantes/mesa-industrial-blanco-nogal.jpg",
+              "img/variantes/mesa-industrial-blanco-ebano.jpg"
+            ]
+          },
+          "imagen_plano": "img/plano_mesa.png",
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 78 cm\nAncho: 120–140 cm\nProfundidad: 70 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Industrial.",
+          "galeria": [
+            "img/galeria/mesa-industrial-angulo.webp",
+            "img/galeria/mesa-industrial-detalle.webp"
+          ]
+        },
+        {
+          "titulo": "Mesa Industrial Reforzada",
+          "descripcion_corta": "Estructura reforzada de hierro y tapa de madera maciza.",
+          "descripcion_modal": "Mesa industrial con estructura reforzada y tapa de madera maciza. Disponible con hierro negro o blanco.",
+          "imagen": "img/mesa_reforzada_negra.png",
+          "imagen_hierro_negro": "img/mesa_reforzada_negra.png",
+          "imagen_hierro_blanco": "img/mesa_blanca_reforzada.png",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/mesa-industrial-reforzada-negro-miel.jpg",
+              "img/variantes/mesa-industrial-reforzada-negro-roble.jpg",
+              "img/variantes/mesa-industrial-reforzada-negro-nogal.jpg",
+              "img/variantes/mesa-industrial-reforzada-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/mesa-industrial-reforzada-blanco-miel.jpg",
+              "img/variantes/mesa-industrial-reforzada-blanco-roble.jpg",
+              "img/variantes/mesa-industrial-reforzada-blanco-nogal.jpg",
+              "img/variantes/mesa-industrial-reforzada-blanco-ebano.jpg"
+            ]
+          },
+          "imagen_plano": "img/plano_mesa.png",
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
           "colores_hierro": "Negro industrial / Blanco industrial",
           "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
           "url_mercadolibre": "#",
-          "url_consulta": "#"
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Industrial%20Reforzada.",
+          "galeria": [
+            "img/galeria/mesa-industrial-reforzada-angulo.webp",
+            "img/galeria/mesa-industrial-reforzada-detalle.webp"
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Bancos",
+      "productos": [
+        {
+          "titulo": "Banco Industrial",
+          "descripcion_corta": "Diseño simple de hierro y madera maciza.",
+          "descripcion_modal": "Banco industrial con estructura de hierro y asiento de madera maciza. Elegí el color de hierro y consultanos por las terminaciones de la madera.",
+          "imagen": "img/banco_negro_simple.jpg",
+          "imagen_hierro_negro": "img/banco_negro_simple.jpg",
+          "imagen_hierro_blanco": "img/banco_simple_blanco.png",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/banco-industrial-negro-miel.jpg",
+              "img/variantes/banco-industrial-negro-roble.jpg",
+              "img/variantes/banco-industrial-negro-nogal.jpg",
+              "img/variantes/banco-industrial-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/banco-industrial-blanco-miel.jpg",
+              "img/variantes/banco-industrial-blanco-roble.jpg",
+              "img/variantes/banco-industrial-blanco-nogal.jpg",
+              "img/variantes/banco-industrial-blanco-ebano.jpg"
+            ]
+          },
+          "imagen_plano": "img/plano_banco_simple.png",
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 45 cm\nAncho: 120 cm\nProfundidad: 35 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20el%20Banco%20Industrial.",
+          "galeria": [
+            "img/galeria/banco-industrial-angulo.webp",
+            "img/galeria/banco-industrial-detalle.webp"
+          ]
         },
         {
-            "titulo": "Mesa Industrial Blanca",
-            "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
-            "descripcion_modal": "Mesa industrial en hierro blanco, ideal para interiores modernos.",
-            "imagen": "img/mesa_blanca_reforzada.png",
-            "imagen_plano": "img/plano_mesa.png",
-            "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
-            "colores_hierro": "Negro industrial / Blanco industrial",
-            "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
-            "url_mercadolibre": "#",
-            "url_consulta": "#"
-        },
-        {
-            "titulo": "Mesa Industrial Blanca Simple   ",
-            "descripcion_corta": "Estructura de hierro blanco con madera maciza.",
-            "descripcion_modal": "Mesa industrial en hierro blanco, ideal para interiores modernos.",
-            "imagen": "img/mesa_simple_blanca.png",
-            "imagen_plano": "img/plano_mesa.png",
-            "colores_madera": ["#c79a63", "#9b6b3e", "#6f4a2b", "#3e2a1c"],
-            "colores_hierro": "Negro industrial / Blanco industrial",
-            "medidas": "Alto: 78 cm\nAncho: 120 cm\nProfundidad: 70 cm",
-            "url_mercadolibre": "#",
-            "url_consulta": "#"
+          "titulo": "Banco Industrial Doble",
+          "descripcion_corta": "Más espacio de apoyo, con estante inferior de madera.",
+          "descripcion_modal": "Versión doble del banco industrial con estante inferior. Disponible con estructura de hierro negro o blanco.",
+          "imagen": "img/banco_negro_doble.png",
+          "imagen_hierro_negro": "img/banco_negro_doble.png",
+          "imagen_hierro_blanco": "img/banco_doble_blanco.png",
+          "variantes_madera": {
+            "negro": [
+              "img/variantes/banco-industrial-doble-negro-miel.jpg",
+              "img/variantes/banco-industrial-doble-negro-roble.jpg",
+              "img/variantes/banco-industrial-doble-negro-nogal.jpg",
+              "img/variantes/banco-industrial-doble-negro-ebano.jpg"
+            ],
+            "blanco": [
+              "img/variantes/banco-industrial-doble-blanco-miel.jpg",
+              "img/variantes/banco-industrial-doble-blanco-roble.jpg",
+              "img/variantes/banco-industrial-doble-blanco-nogal.jpg",
+              "img/variantes/banco-industrial-doble-blanco-ebano.jpg"
+            ]
+          },
+          "imagen_plano": "img/plano_banco_doble.png",
+          "colores_madera": [
+            "#c79a63",
+            "#9b6b3e",
+            "#6f4a2b",
+            "#3e2a1c"
+          ],
+          "colores_hierro": "Negro industrial / Blanco industrial",
+          "medidas": "Alto: 45 cm\nAncho: 150 cm\nProfundidad: 35 cm",
+          "url_mercadolibre": "#",
+          "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20el%20Banco%20Industrial%20Doble.",
+          "galeria": [
+            "img/galeria/banco-industrial-doble-angulo.webp",
+            "img/galeria/banco-industrial-doble-detalle.webp"
+          ]
         }
       ]
     }

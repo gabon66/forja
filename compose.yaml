@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8000:80"
+    depends_on:
+      - mailpit
+    restart: unless-stopped
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "127.0.0.1:8025:8025"
+    restart: unless-stopped
+
