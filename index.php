@@ -93,6 +93,7 @@ function productSlug(string $value): string
                         $imagenHierroNegro = (string) ($producto['imagen_hierro_negro'] ?? $imagen);
                         $imagenHierroBlanco = (string) ($producto['imagen_hierro_blanco'] ?? '');
                         $modelo3d = (string) ($producto['modelo_3d'] ?? '');
+                        $modelo3dNota = (string) ($producto['modelo_3d_nota'] ?? '');
                         $modelo3dRevision = $modelo3d !== '' && is_file(__DIR__ . '/' . $modelo3d)
                             ? '?v=' . filemtime(__DIR__ . '/' . $modelo3d)
                             : '';
@@ -112,6 +113,7 @@ function productSlug(string $value): string
                                 data-iron-image-black="<?= e($imagenHierroNegro) ?>"
                                 data-iron-image-white="<?= e($imagenHierroBlanco) ?>"
                                 data-model3d="<?= e($modelo3d . $modelo3dRevision) ?>"
+                                data-model3d-note="<?= e($modelo3dNota) ?>"
                                 data-current-iron-color="black"
                                 data-wood-colors="<?= e((string) json_encode($coloresMadera)) ?>"
                                 data-wood-variants="<?= e((string) json_encode($variantesMadera)) ?>"
@@ -324,12 +326,12 @@ function productSlug(string $value): string
                                 <small class="d-block text-secondary mt-2">Giralo con el mouse o el dedo. En un celular compatible, podés probarlo en tu espacio.</small>
                             </div>
                             <div id="productoVista3D" class="product-3d-view mt-3" hidden>
-                                <model-viewer id="productoModelo3D" alt="Modelo 3D de la Mesa Living Nord con estante" camera-controls touch-action="pan-y" shadow-intensity="1" exposure=".8" tone-mapping="neutral" environment-image="neutral" camera-orbit="45deg 65deg auto" camera-target="0m 0.3m 0m" field-of-view="27deg" ar ar-scale="fixed" ar-modes="webxr scene-viewer quick-look" ar-placement="floor" xr-environment>
+                                <model-viewer id="productoModelo3D" alt="Modelo 3D del producto" camera-controls touch-action="pan-y" shadow-intensity="1" exposure=".8" tone-mapping="neutral" environment-image="neutral" camera-orbit="45deg 65deg auto" camera-target="0m 0.3m 0m" field-of-view="27deg" ar ar-scale="fixed" ar-modes="webxr scene-viewer quick-look" ar-placement="floor" xr-environment>
                                     <button slot="ar-button" class="btn btn-gold product-3d-ar-button" type="button">
                                         <i class="bi bi-camera me-2" aria-hidden="true"></i>Ver en mi espacio
                                     </button>
                                 </model-viewer>
-                                <small class="d-block text-secondary mt-2">Tapa: 120 × 60 cm · Alto: 60 cm · Perfiles: 8 × 8 cm · Marco trapezoidal: 60 cm arriba y 44 cm en la base. El estante es aproximado.</small>
+                                <small id="productoNota3D" class="d-block text-secondary mt-2">Tapa: 120 × 60 cm · Alto: 60 cm · Perfiles: 8 × 8 cm · Marco trapezoidal: 60 cm arriba y 44 cm en la base. El estante es aproximado.</small>
                             </div>
                             <div id="productoVariantesHierro" class="d-flex gap-2 mt-3" hidden>
                                 <button id="productoHierroNegro" class="btn btn-outline-light btn-sm" type="button">Hierro negro</button>

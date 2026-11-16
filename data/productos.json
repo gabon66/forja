@@ -47,6 +47,8 @@
           "imagen": "img/mesa_living_nord_02_negra.png",
           "imagen_hierro_negro": "img/mesa_living_nord_02_negra.png",
           "imagen_hierro_blanco": "img/mesa_living_nord_02_blanca.png",
+          "modelo_3d": "img/modelos/mesa-living-nord.glb",
+          "modelo_3d_nota": "Tapa: 120 × 50 cm · Alto: 50 cm · Perfiles: 8 × 8 cm · Patas rectas, sin inclinación.",
           "variantes_madera": {
             "negro": [
               "img/variantes/mesa-living-nord-negro-miel.jpg",
@@ -68,7 +70,7 @@
             "#3e2a1c"
           ],
           "colores_hierro": "Negro industrial / Blanco industrial",
-          "medidas": "Medidas a consultar. Terminación de madera personalizable.",
+          "medidas": "Tapa: 120 × 50 cm\nAlto: 50 cm\nPerfiles de hierro: 8 × 8 cm",
           "url_mercadolibre": "#",
           "url_consulta": "https://wa.me/5491128173940?text=Hola%2C%20quisiera%20consultar%20por%20la%20Mesa%20Living%20Nord.",
           "galeria": [

@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const model3DButton = document.getElementById("productoAlternar3D");
   const model3DView = document.getElementById("productoVista3D");
   const model3DViewer = document.getElementById("productoModelo3D");
+  const model3DNote = document.getElementById("productoNota3D");
   const modalDescription = document.getElementById("productoDescripcion");
   const modalIronColors = document.getElementById("productoColorHierro");
   const modalMeasures = document.getElementById("productoMedidas");
@@ -214,6 +215,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const { title, desc, image, ironImageBlack, ironImageWhite, ironColors, measures, consulta, woodColors, woodVariants, gallery } = trigger.dataset;
 
     modalTitle.textContent = title || "";
+    model3DViewer.setAttribute("alt", `Modelo 3D de ${title || "este producto"}`);
+    model3DNote.textContent = trigger.dataset.model3dNote || "Tapa: 120 × 60 cm · Alto: 60 cm · Perfiles: 8 × 8 cm · Marco trapezoidal: 60 cm arriba y 44 cm en la base. El estante es aproximado.";
     modalDescription.textContent = desc || "";
     let parsedGallery = [];
     if (gallery) {
