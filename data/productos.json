@@ -11,6 +11,8 @@
           "imagen_hierro_negro": "img/mesa_living_nord_01_negra.jpeg",
           "imagen_hierro_blanco": "img/mesa_living_nord_01_blanca.png",
           "modelo_3d": "img/modelos/mesa-living-nord-estante.glb",
+          "modelo_3d_nota": "Tapa: 120 × 60 cm · Alto: 60 cm · Perfiles: {perfil} × {perfil} cm · Marco trapezoidal: 60 cm arriba y {base} cm en la base. El estante es aproximado.",
+          "perfiles_hierro": [4, 8, 10],
           "variantes_madera": {
             "negro": [
               "img/variantes/mesa-living-nord-estante-negro-miel.jpg",
@@ -48,7 +50,8 @@
           "imagen_hierro_negro": "img/mesa_living_nord_02_negra.png",
           "imagen_hierro_blanco": "img/mesa_living_nord_02_blanca.png",
           "modelo_3d": "img/modelos/mesa-living-nord.glb",
-          "modelo_3d_nota": "Tapa: 120 × 50 cm · Alto: 50 cm · Perfiles: 8 × 8 cm · Patas rectas, sin inclinación.",
+          "modelo_3d_nota": "Tapa: 120 × 50 cm · Alto: 50 cm · Perfiles: {perfil} × {perfil} cm · Patas rectas, sin inclinación.",
+          "perfiles_hierro": [4, 8, 10],
           "variantes_madera": {
             "negro": [
               "img/variantes/mesa-living-nord-negro-miel.jpg",

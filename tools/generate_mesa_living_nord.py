@@ -94,7 +94,7 @@ def quaternion_from_z(direction):
     return [axis[0] * scale, axis[1] * scale, axis[2] * scale, math.cos(half_angle)]
 
 
-def make_glb(wood_color, iron_color, model_type="shelf"):
+def make_glb(wood_color, iron_color, model_type="shelf", iron_cm=8):
     positions, normals, texcoords, indices = cube_geometry()
     binary = bytearray()
     views = []
@@ -142,44 +142,60 @@ def make_glb(wood_color, iron_color, model_type="shelf"):
         center = tuple((start[i] + end[i]) / 2 for i in range(3))
         box(name, material_index, center, (width, width, length), quaternion_from_z(direction))
 
+    profile = iron_cm / 100
     if model_type == "simple":
         # Straight rectangular frame; all dimensions are meters. The tabletop
         # is 120 x 50 cm and its underside is 47 cm above the floor.
         box("Tapa de madera maciza 120 x 50 cm", 0, (0, .485, 0), (1.2, .03, .5))
-        for side_x in (-.56, .56):
-            for side_z in (-.21, .21):
-                box("Pata recta de hierro 80 x 80 mm", 1, (side_x, .235, side_z), (.08, .47, .08))
-            box("Travesaño superior recto", 1, (side_x, .43, 0), (.08, .08, .34))
-            box("Travesaño inferior recto", 1, (side_x, .04, 0), (.08, .08, .34))
-        for side_z in (-.21, .21):
-            box("Larguero longitudinal superior recto", 1, (0, .43, side_z), (1.04, .08, .08))
+        side_x = .6 - profile / 2
+        side_z = .25 - profile / 2
+        rail_y = .47 - profile / 2
+        for frame_x in (-side_x, side_x):
+            for leg_z in (-side_z, side_z):
+                box(f"Pata recta de hierro {iron_cm} x {iron_cm} cm", 1,
+                    (frame_x, .235, leg_z), (profile, .47, profile))
+            box("Travesaño superior recto", 1, (frame_x, rail_y, 0),
+                (profile, profile, .5 - profile))
+            box("Travesaño inferior recto", 1, (frame_x, profile / 2, 0),
+                (profile, profile, .5 - profile))
+        for rail_z in (-side_z, side_z):
+            box("Larguero longitudinal superior recto", 1, (0, rail_y, rail_z),
+                (1.2 - 2 * profile, profile, profile))
     else:
         # Y is vertical in glTF. Dimensions are meters; the top is exactly 1.20 x 0.60 x 0.03 m.
         box("Tapa de madera maciza 120 x 60 x 3 cm", 0, (0, .585, 0), (1.2, .03, .6))
 
         # The two end frames are trapezoids: 60 cm outside width at the top,
         # narrowing to 44 cm at the floor (80 mm inward on each side).
-        for side_x in (-.56, .56):
-            box("Travesaño superior del trapecio, ancho exterior 60 cm", 1, (side_x, .53, 0), (.08, .08, .52))
-            box("Travesaño inferior del trapecio, ancho exterior 44 cm", 1, (side_x, .04, 0), (.08, .08, .36))
+        top_side_z = .30 - profile / 2
+        bottom_side_z = .30 - 1.5 * profile
+        frame_x = .60 - profile / 2
+        top_rail_y = .57 - profile / 2
+        for side_x in (-frame_x, frame_x):
+            box(f"Travesaño superior del trapecio, perfil {iron_cm} cm", 1,
+                (side_x, top_rail_y, 0), (profile, profile, .60 - profile))
+            box(f"Travesaño inferior del trapecio, perfil {iron_cm} cm", 1,
+                (side_x, profile / 2, 0), (profile, profile, .60 - 3 * profile))
             for side_z in (-1, 1):
                 beam(
-                    "Pata inclinada hacia adentro, perfil 80 x 80 mm",
+                    f"Pata inclinada hacia adentro, perfil {iron_cm} x {iron_cm} cm",
                     # Extend each leg through the lower and upper crossbars so
                     # angled end caps cannot leave visible gaps at the joints.
-                    (side_x, 0, side_z * .174),
-                    (side_x, .57, side_z * .266),
-                    .08,
+                    (side_x, 0, side_z * bottom_side_z),
+                    (side_x, .57, side_z * top_side_z),
+                    profile,
                 )
 
         # Longitudinal rails meet the inside faces of the end frames. Their outside
         # faces still define the full 120 cm overall length with the 80 mm frames.
-        for side_z in (-.26, .26):
-            box("Larguero longitudinal superior de hierro 80 x 80 mm", 1, (0, .53, side_z), (1.04, .08, .08))
+        for side_z in (-top_side_z, top_side_z):
+            box(f"Larguero longitudinal superior de hierro {iron_cm} x {iron_cm} mm", 1,
+                (0, top_rail_y, side_z), (1.2 - 2 * profile, profile, profile))
 
         # The approximate lower shelf rests on the bottom crossbars of the end
         # frames and matches the tabletop's full 120 cm length.
-        box("Estante inferior de madera de 120 cm (proporción aproximada)", 0, (0, .0925, 0), (1.2, .025, .3))
+        box("Estante inferior de madera de 120 cm (proporción aproximada)", 0,
+            (0, profile + .0125, 0), (1.2, .025, .3))
 
     materials = [
         {"name": "Madera", "pbrMetallicRoughness": {
@@ -199,10 +215,10 @@ def make_glb(wood_color, iron_color, model_type="shelf"):
 
     document = {
         "asset": {"version": "2.0", "generator": "Forja Nordica model generator",
-                  "extras": ({"tapa_cm": [120, 50], "altura_cm": 50, "perfil_cm": [8, 8],
+                  "extras": ({"tapa_cm": [120, 50], "altura_cm": 50, "perfil_cm": [iron_cm, iron_cm],
                               "estructura": "patas rectas sin inclinación"} if model_type == "simple" else
-                             {"tapa_cm": [120, 60, 3], "altura_cm": 60, "perfil_cm": [8, 8],
-                              "marco_trapezoidal_cm": {"ancho_superior": 60, "ancho_inferior": 44},
+                             {"tapa_cm": [120, 60, 3], "altura_cm": 60, "perfil_cm": [iron_cm, iron_cm],
+                              "marco_trapezoidal_cm": {"ancho_superior": 60, "ancho_inferior": 60 - 2 * iron_cm},
                               "estante_inferior": "Proporción aproximada a partir de la foto"})},
         "scene": 0,
         "scenes": [{"nodes": list(range(len(nodes)))}],
@@ -231,19 +247,21 @@ def make_glb(wood_color, iron_color, model_type="shelf"):
 if __name__ == "__main__":
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     default_model = OUTPUT_DIR / "mesa-living-nord-estante.glb"
-    default_model.write_bytes(make_glb(WOOD_FINISHES[0][1], IRON_FINISHES[0][1]))
+    default_model.write_bytes(make_glb(WOOD_FINISHES[0][1], IRON_FINISHES[0][1], iron_cm=8))
     print(f"Modelo generado: {default_model.relative_to(ROOT)} ({default_model.stat().st_size:,} bytes)")
-    for wood_name, wood_color in WOOD_FINISHES:
-        for iron_name, iron_color in IRON_FINISHES:
-            output = OUTPUT_DIR / f"mesa-living-nord-estante-{wood_name}-{iron_name}.glb"
-            output.write_bytes(make_glb(wood_color, iron_color))
-            print(f"Modelo generado: {output.relative_to(ROOT)} ({output.stat().st_size:,} bytes)")
+    for iron_cm in (4, 8, 10):
+        for wood_name, wood_color in WOOD_FINISHES:
+            for iron_name, iron_color in IRON_FINISHES:
+                output = OUTPUT_DIR / f"mesa-living-nord-estante-{wood_name}-{iron_name}-{iron_cm}cm.glb"
+                output.write_bytes(make_glb(wood_color, iron_color, iron_cm=iron_cm))
+                print(f"Modelo generado: {output.relative_to(ROOT)} ({output.stat().st_size:,} bytes)")
     simple_model = OUTPUT_DIR / "mesa-living-nord.glb"
-    simple_model.write_bytes(make_glb(WOOD_FINISHES[0][1], IRON_FINISHES[0][1], "simple"))
+    simple_model.write_bytes(make_glb(WOOD_FINISHES[0][1], IRON_FINISHES[0][1], "simple", 8))
     print(f"Modelo generado: {simple_model.relative_to(ROOT)} ({simple_model.stat().st_size:,} bytes)")
-    for wood_name, wood_color in WOOD_FINISHES:
-        for iron_name, iron_color in IRON_FINISHES:
-            output = OUTPUT_DIR / f"mesa-living-nord-{wood_name}-{iron_name}.glb"
-            output.write_bytes(make_glb(wood_color, iron_color, "simple"))
-            print(f"Modelo generado: {output.relative_to(ROOT)} ({output.stat().st_size:,} bytes)")
+    for iron_cm in (4, 8, 10):
+        for wood_name, wood_color in WOOD_FINISHES:
+            for iron_name, iron_color in IRON_FINISHES:
+                output = OUTPUT_DIR / f"mesa-living-nord-{wood_name}-{iron_name}-{iron_cm}cm.glb"
+                output.write_bytes(make_glb(wood_color, iron_color, "simple", iron_cm))
+                print(f"Modelo generado: {output.relative_to(ROOT)} ({output.stat().st_size:,} bytes)")
 

@@ -93,14 +93,13 @@ function productSlug(string $value): string
                         $imagenHierroNegro = (string) ($producto['imagen_hierro_negro'] ?? $imagen);
                         $imagenHierroBlanco = (string) ($producto['imagen_hierro_blanco'] ?? '');
                         $modelo3d = (string) ($producto['modelo_3d'] ?? '');
-                        $modelo3dNota = (string) ($producto['modelo_3d_nota'] ?? '');
+                        $perfilesHierro = $producto['perfiles_hierro'] ?? [];
                         $modelo3dRevision = $modelo3d !== '' && is_file(__DIR__ . '/' . $modelo3d)
                             ? '?v=' . filemtime(__DIR__ . '/' . $modelo3d)
                             : '';
                         $coloresMadera = $producto['colores_madera'] ?? [];
                         $variantesMadera = $producto['variantes_madera'] ?? [];
                         $galeria = $producto['galeria'] ?? [];
-                        $coloresHierro = (string) ($producto['colores_hierro'] ?? '');
                         $medidas = (string) ($producto['medidas'] ?? '');
                         $urlConsulta = (string) ($producto['url_consulta'] ?? '#');
                         ?>
@@ -113,12 +112,11 @@ function productSlug(string $value): string
                                 data-iron-image-black="<?= e($imagenHierroNegro) ?>"
                                 data-iron-image-white="<?= e($imagenHierroBlanco) ?>"
                                 data-model3d="<?= e($modelo3d . $modelo3dRevision) ?>"
-                                data-model3d-note="<?= e($modelo3dNota) ?>"
+                                data-iron-profile-options="<?= e((string) json_encode($perfilesHierro)) ?>"
                                 data-current-iron-color="black"
                                 data-wood-colors="<?= e((string) json_encode($coloresMadera)) ?>"
                                 data-wood-variants="<?= e((string) json_encode($variantesMadera)) ?>"
                                 data-gallery="<?= e((string) json_encode($galeria)) ?>"
-                                data-iron-colors="<?= e($coloresHierro) ?>"
                                 data-measures="<?= e($medidas) ?>"
                                 data-consulta="<?= e($urlConsulta) ?>">
                                 <div class="product-card-gallery" data-card-gallery data-gallery-images="<?= e((string) json_encode(array_merge([$imagen], is_array($galeria) ? $galeria : []))) ?>">
@@ -312,6 +310,15 @@ function productSlug(string $value): string
                 <div class="modal-body">
                     <div class="row g-4">
                         <div class="col-md-6">
+                            <div id="productoVista3D" class="product-3d-view product-3d-view-main" hidden>
+                                <model-viewer id="productoModelo3D" alt="Modelo 3D del producto" camera-controls touch-action="pan-y" shadow-intensity="1" exposure=".8" tone-mapping="neutral" environment-image="neutral" camera-orbit="45deg 65deg auto" camera-target="0m 0.3m 0m" field-of-view="27deg" ar ar-scale="fixed" ar-modes="webxr scene-viewer quick-look" ar-placement="floor" xr-environment>
+                                    <button slot="ar-button" class="btn btn-gold product-3d-ar-button" type="button">
+                                        <i class="bi bi-camera me-2" aria-hidden="true"></i>Ver en mi espacio
+                                    </button>
+                                </model-viewer>
+                                <small class="d-block text-secondary mt-2">Giralo con el mouse o el dedo. En un celular compatible, podés probarlo en tu espacio.</small>
+                            </div>
+                            <div id="productoGaleriaAncla"></div>
                             <div id="productoGaleria" class="product-gallery">
                                 <div class="product-gallery-stage">
                                     <img id="productoImagen" class="img-fluid rounded modal-product-image" alt="Producto">
@@ -322,26 +329,17 @@ function productSlug(string $value): string
                                         <i class="bi bi-chevron-right"></i>
                                     </button>
                                 </div>
-                                <div id="productoGaleriaIndicadores" class="product-gallery-indicators" aria-label="Elegir imagen"></div>
-                                <small class="product-gallery-note">Vistas ilustrativas del modelo. Los detalles pueden variar según la terminación elegida.</small>
-                            </div>
-                            <div class="product-3d-actions mt-3" id="productoAcciones3D" hidden>
-                                <button id="productoAlternar3D" class="btn btn-outline-light btn-sm" type="button" aria-pressed="false">
-                                    <i class="bi bi-box me-1" aria-hidden="true"></i>Ver modelo 3D
-                                </button>
-                                <small class="d-block text-secondary mt-2">Giralo con el mouse o el dedo. En un celular compatible, podés probarlo en tu espacio.</small>
-                            </div>
-                            <div id="productoVista3D" class="product-3d-view mt-3" hidden>
-                                <model-viewer id="productoModelo3D" alt="Modelo 3D del producto" camera-controls touch-action="pan-y" shadow-intensity="1" exposure=".8" tone-mapping="neutral" environment-image="neutral" camera-orbit="45deg 65deg auto" camera-target="0m 0.3m 0m" field-of-view="27deg" ar ar-scale="fixed" ar-modes="webxr scene-viewer quick-look" ar-placement="floor" xr-environment>
-                                    <button slot="ar-button" class="btn btn-gold product-3d-ar-button" type="button">
-                                        <i class="bi bi-camera me-2" aria-hidden="true"></i>Ver en mi espacio
+                                <div id="productoMiniaturasCarrusel" class="product-photo-carousel" hidden>
+                                    <button id="productoMiniaturaAnterior" class="product-photo-carousel-nav" type="button" aria-label="Desplazar fotos anteriores">
+                                        <i class="bi bi-chevron-left" aria-hidden="true"></i>
                                     </button>
-                                </model-viewer>
-                                <small id="productoNota3D" class="d-block text-secondary mt-2">Tapa: 120 × 60 cm · Alto: 60 cm · Perfiles: 8 × 8 cm · Marco trapezoidal: 60 cm arriba y 44 cm en la base. El estante es aproximado.</small>
-                            </div>
-                            <div id="productoVariantesHierro" class="d-flex gap-2 mt-3" hidden>
-                                <button id="productoHierroNegro" class="btn btn-outline-light btn-sm" type="button">Hierro negro</button>
-                                <button id="productoHierroBlanco" class="btn btn-outline-light btn-sm" type="button">Hierro blanco</button>
+                                    <div id="productoGaleriaMiniaturas" class="product-photo-carousel-track" aria-label="Fotos del modelo"></div>
+                                    <button id="productoMiniaturaSiguiente" class="product-photo-carousel-nav" type="button" aria-label="Desplazar fotos siguientes">
+                                        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div id="productoGaleriaIndicadores" class="product-gallery-indicators" aria-label="Elegir imagen"></div>
+                                <small id="productoNotaGaleria" class="product-gallery-note">Vistas ilustrativas del modelo. Los detalles pueden variar según la terminación elegida.</small>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -353,7 +351,18 @@ function productSlug(string $value): string
                             </div>
                             <div id="productoSeccionColorHierro">
                                 <h6>Color del hierro</h6>
-                                <p id="productoColorHierro"></p>
+                                <div id="productoVariantesHierro" class="wood-colors iron-colors mt-2" role="group" aria-label="Elegir color del hierro" hidden>
+                                    <button id="productoHierroNegro" class="wood iron-color iron-black" type="button" aria-label="Hierro negro" title="Hierro negro" aria-pressed="false"></button>
+                                    <button id="productoHierroBlanco" class="wood iron-color iron-white" type="button" aria-label="Hierro blanco" title="Hierro blanco" aria-pressed="false"></button>
+                                </div>
+                            </div>
+                            <div id="productoSeccionPerfilHierro" class="product-iron-profile" hidden>
+                                <h6>Medida del hierro</h6>
+                                <div id="productoPerfilesHierro" class="d-flex flex-wrap gap-2" role="group" aria-label="Elegir medida del perfil de hierro">
+                                    <button class="btn btn-outline-light btn-sm" type="button" data-profile-size="4" aria-pressed="false">4 cm</button>
+                                    <button class="btn btn-outline-light btn-sm active" type="button" data-profile-size="8" aria-pressed="true">8 cm</button>
+                                    <button class="btn btn-outline-light btn-sm" type="button" data-profile-size="10" aria-pressed="false">10 cm</button>
+                                </div>
                             </div>
                             <hr>
                             <h6>Medidas</h6>
@@ -361,13 +370,11 @@ function productSlug(string $value): string
                             <small class="text-secondary">Las medidas indicadas son de referencia y podemos adaptarlas al espacio y al uso que necesites.</small>
                         </div>
                     </div>
+                    <div id="productoSeparadorGaleria" hidden><hr class="my-3"></div>
+                    <div id="productoGaleriaAnchoCompleto" class="product-gallery-full-width" hidden></div>
                     <hr class="my-4">
                     <div class="product-contact-section">
-                        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
-                            <a id="productoConsulta" href="#" class="btn btn-gold" target="_blank" rel="noopener noreferrer">
-                                <i class="bi bi-whatsapp me-2"></i>Consultar este modelo por WhatsApp
-                            </a>
-                        </div>
+                        <h5 class="mb-3">Consultas por este modelo</h5>
                         <form id="productoFormularioContacto" class="contact-form" data-contact-form action="enviar-consulta.php" method="post">
                             <input type="hidden" name="producto" id="productoNombreModelo" value="">
                             <div class="row g-3">
@@ -396,10 +403,15 @@ function productSlug(string $value): string
                                         <i class="bi bi-send me-2"></i>Enviar consulta
                                     </button>
                                     <span id="productoEstadoFormulario" class="small" data-form-status role="status" aria-live="polite"></span>
-                                    <span id="productoEstadoCompartir" class="small text-secondary" role="status" aria-live="polite"></span>
-                                    <button id="productoCompartir" type="button" class="btn btn-outline-light ms-auto">
-                                        <i class="bi bi-link-45deg me-1"></i>Copiar enlace
-                                    </button>
+                                    <div class="product-contact-actions ms-auto">
+                                        <span id="productoEstadoCompartir" class="small text-secondary" role="status" aria-live="polite"></span>
+                                        <a id="productoConsulta" href="#" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                                            <i class="bi bi-whatsapp me-1" aria-hidden="true"></i>Consulta WhatsApp
+                                        </a>
+                                        <button id="productoCompartir" type="button" class="btn btn-outline-light">
+                                            <i class="bi bi-link-45deg me-1"></i>Copiar enlace
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -407,6 +419,20 @@ function productSlug(string $value): string
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="productoZoomFotos" class="product-photo-zoom" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+        <button id="productoZoomCerrar" class="product-photo-zoom-close" type="button" aria-label="Cerrar foto ampliada">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+        <button id="productoZoomAnterior" class="product-photo-zoom-nav product-photo-zoom-prev" type="button" aria-label="Ver foto anterior">
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+        </button>
+        <img id="productoZoomImagen" alt="">
+        <button id="productoZoomSiguiente" class="product-photo-zoom-nav product-photo-zoom-next" type="button" aria-label="Ver foto siguiente">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+        </button>
+        <span id="productoZoomContador" class="product-photo-zoom-count" aria-live="polite"></span>
     </div>
 
     <footer class="footer text-center">
