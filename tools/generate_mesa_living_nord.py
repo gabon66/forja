@@ -79,21 +79,6 @@ def align4(data):
     return data + b"\0" * ((-len(data)) % 4)
 
 
-def quaternion_from_z(direction):
-    length = math.sqrt(sum(value * value for value in direction))
-    vector = tuple(value / length for value in direction)
-    dot = max(-1.0, min(1.0, vector[2]))
-    if dot < -0.999999:
-        return [1, 0, 0, 0]
-    axis = (-vector[1], vector[0], 0)
-    axis_length = math.sqrt(sum(value * value for value in axis))
-    if axis_length < 1e-8:
-        return [0, 0, 0, 1]
-    half_angle = math.acos(dot) / 2
-    scale = math.sin(half_angle) / axis_length
-    return [axis[0] * scale, axis[1] * scale, axis[2] * scale, math.cos(half_angle)]
-
-
 def make_glb(wood_color, iron_color, model_type="shelf", iron_cm=8):
     positions, normals, texcoords, indices = cube_geometry()
     binary = bytearray()
@@ -129,18 +114,80 @@ def make_glb(wood_color, iron_color, model_type="shelf", iron_cm=8):
     ))
 
     nodes = []
+    extra_meshes = []
+
+    def add_mitered_legs_mesh(profile, frame_x, top_side_z, bottom_side_z):
+        mesh_positions, mesh_normals, mesh_texcoords, mesh_indices = [], [], [], []
+
+        def add_face(corners, center):
+            a, b, c = corners[:3]
+            ab = tuple(b[i] - a[i] for i in range(3))
+            ac = tuple(c[i] - a[i] for i in range(3))
+            normal = (ab[1] * ac[2] - ab[2] * ac[1],
+                      ab[2] * ac[0] - ab[0] * ac[2],
+                      ab[0] * ac[1] - ab[1] * ac[0])
+            face_center = tuple(sum(point[i] for point in corners) / len(corners) for i in range(3))
+            if sum(normal[i] * (face_center[i] - center[i]) for i in range(3)) < 0:
+                corners = list(reversed(corners))
+                a, b, c = corners[:3]
+                ab = tuple(b[i] - a[i] for i in range(3))
+                ac = tuple(c[i] - a[i] for i in range(3))
+                normal = (ab[1] * ac[2] - ab[2] * ac[1],
+                          ab[2] * ac[0] - ab[0] * ac[2],
+                          ab[0] * ac[1] - ab[1] * ac[0])
+            length = math.sqrt(sum(value * value for value in normal))
+            normal = tuple(value / length for value in normal)
+            start = len(mesh_positions) // 3
+            for vertex_index, point in enumerate(corners):
+                mesh_positions.extend(point)
+                mesh_normals.extend(normal)
+                mesh_texcoords.extend(((0, 0), (0, 1), (1, 1), (1, 0))[vertex_index])
+            mesh_indices.extend((start, start + 1, start + 2, start, start + 2, start + 3))
+
+        for side_x in (-frame_x, frame_x):
+            for side_z in (-1, 1):
+                bottom_z = side_z * bottom_side_z
+                top_z = side_z * top_side_z
+                x0, x1 = side_x - profile / 2, side_x + profile / 2
+                low_in, low_out = (x0, 0, bottom_z - profile / 2), (x0, 0, bottom_z + profile / 2)
+                high_in, high_out = (x0, .57, top_z - profile / 2), (x0, .57, top_z + profile / 2)
+                low_in_r, low_out_r = (x1, 0, bottom_z - profile / 2), (x1, 0, bottom_z + profile / 2)
+                high_in_r, high_out_r = (x1, .57, top_z - profile / 2), (x1, .57, top_z + profile / 2)
+                center = (side_x, .285, (bottom_z + top_z) / 2)
+                add_face([low_in, high_in, high_out, low_out], center)
+                add_face([low_in_r, low_out_r, high_out_r, high_in_r], center)
+                add_face([low_in, low_in_r, low_out_r, low_out], center)
+                add_face([high_in, high_out, high_out_r, high_in_r], center)
+                add_face([low_in, high_in, high_in_r, low_in_r], center)
+                add_face([low_out, low_out_r, high_out_r, high_out], center)
+
+        position_view = add_view(struct.pack(f"<{len(mesh_positions)}f", *mesh_positions), 34962)
+        normal_view = add_view(struct.pack(f"<{len(mesh_normals)}f", *mesh_normals), 34962)
+        uv_view = add_view(struct.pack(f"<{len(mesh_texcoords)}f", *mesh_texcoords), 34962)
+        index_view = add_view(struct.pack(f"<{len(mesh_indices)}H", *mesh_indices), 34963)
+        first_accessor = len(accessors)
+        accessors.extend((
+            {"bufferView": position_view, "componentType": 5126, "count": len(mesh_positions) // 3,
+             "type": "VEC3", "min": [min(mesh_positions[i::3]) for i in range(3)],
+             "max": [max(mesh_positions[i::3]) for i in range(3)]},
+            {"bufferView": normal_view, "componentType": 5126, "count": len(mesh_normals) // 3, "type": "VEC3"},
+            {"bufferView": uv_view, "componentType": 5126, "count": len(mesh_texcoords) // 2, "type": "VEC2"},
+            {"bufferView": index_view, "componentType": 5123, "count": len(mesh_indices), "type": "SCALAR"},
+        ))
+        extra_meshes.append({
+            "name": "Patas inclinadas con cortes a inglete",
+            "primitives": [{
+                "attributes": {"POSITION": first_accessor, "NORMAL": first_accessor + 1,
+                               "TEXCOORD_0": first_accessor + 2},
+                "indices": first_accessor + 3, "material": 1, "mode": 4,
+            }],
+        })
 
     def box(name, material_index, center, size, rotation=None):
         node = {"name": name, "mesh": material_index, "translation": list(center), "scale": list(size)}
         if rotation:
             node["rotation"] = rotation
         nodes.append(node)
-
-    def beam(name, start, end, width, material_index=1):
-        direction = tuple(end[i] - start[i] for i in range(3))
-        length = math.sqrt(sum(value * value for value in direction))
-        center = tuple((start[i] + end[i]) / 2 for i in range(3))
-        box(name, material_index, center, (width, width, length), quaternion_from_z(direction))
 
     profile = iron_cm / 100
     if model_type == "simple":
@@ -176,15 +223,9 @@ def make_glb(wood_color, iron_color, model_type="shelf", iron_cm=8):
                 (side_x, top_rail_y, 0), (profile, profile, .60 - profile))
             box(f"Travesaño inferior del trapecio, perfil {iron_cm} cm", 1,
                 (side_x, profile / 2, 0), (profile, profile, .60 - 3 * profile))
-            for side_z in (-1, 1):
-                beam(
-                    f"Pata inclinada hacia adentro, perfil {iron_cm} x {iron_cm} cm",
-                    # Extend each leg through the lower and upper crossbars so
-                    # angled end caps cannot leave visible gaps at the joints.
-                    (side_x, 0, side_z * bottom_side_z),
-                    (side_x, .57, side_z * top_side_z),
-                    profile,
-                )
+
+        add_mitered_legs_mesh(profile, frame_x, top_side_z, bottom_side_z)
+        nodes.append({"name": "Patas inclinadas con cortes a inglete", "mesh": 2})
 
         # Longitudinal rails meet the inside faces of the end frames. Their outside
         # faces still define the full 120 cm overall length with the 80 mm frames.
@@ -226,7 +267,7 @@ def make_glb(wood_color, iron_color, model_type="shelf", iron_cm=8):
         "meshes": [
             {"name": "Madera", "primitives": [primitives[0]]},
             {"name": "Hierro", "primitives": [primitives[1]]},
-        ],
+        ] + extra_meshes,
         "materials": materials,
         "samplers": [{"magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497}],
         "textures": [{"sampler": 0, "source": 0}],
